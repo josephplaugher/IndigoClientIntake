@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'reactform-appco'
-import 'css/user.css'
-import 'css/form.css'
+
+import 'css/user.scss'
 
 class User extends Component {
 	constructor(props) {

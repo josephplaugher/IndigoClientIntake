@@ -8,10 +8,7 @@ import PayInvoice from './ach/PayInvoice'
 import DeleteBank from './ach/DeleteBank'
 import { Elements } from 'react-stripe-elements'
 
-import 'css/main.css'
-import 'css/logo.css'
-import 'css/form.css'
-import 'css/ach.css'
+import 'css/ach.scss'
 
 class ACHHome extends React.Component {
 	constructor(props) {

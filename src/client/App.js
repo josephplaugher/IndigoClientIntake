@@ -11,9 +11,9 @@ import NewUser from './NewUser'
 import { StripeProvider } from 'react-stripe-elements'
 // import Logo from './AppreciateLogo.png'
 
-import 'css/main.css'
-import 'css/form.css'
-import 'css/userNotify.css'
+import 'css/main.scss'
+import 'css/form.scss'
+import 'css/userNotify.scss'
 
 class AppreciateCo extends FormClass {
 	constructor(props) {
@@ -50,11 +50,13 @@ class AppreciateCo extends FormClass {
 			if (res.isLoggedIn === true) {
 				this.setState({
 					isLoggedIn: res.isLoggedIn,
-					userData: res.userData
+					userData: res.userData,
+					login: false
 				})
 			} else {
 				this.setState({
 					isLoggedIn: false,
+					login: true,
 					userData: {}
 				})
 			}
@@ -77,7 +79,6 @@ class AppreciateCo extends FormClass {
 			)
 			sessionStorage.setItem(process.env.TOKEN_NAME, res.data.token)
 			this.setState({
-				// token: res.data.token,
 				userNotify: res.data.userNotify,
 				userData: res.data.userData,
 				isLoggedIn: true,

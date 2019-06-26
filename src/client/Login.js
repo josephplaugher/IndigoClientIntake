@@ -1,13 +1,7 @@
 import React from 'react'
 import { FormClass, Input, Button } from 'reactform-appco'
-import Ajax from 'Util/Ajax'
-import SetUrl from 'Util/SetUrl'
 import ValRules from 'Util/ValRules'
 import EB from 'Util/EB'
-
-import 'css/main.css'
-import 'css/form.css'
-import 'css/userNotify.css'
 
 class Login extends FormClass {
 	constructor(props) {

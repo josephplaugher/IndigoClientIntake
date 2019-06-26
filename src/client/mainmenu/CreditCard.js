@@ -7,10 +7,6 @@ import Ajax from 'Util/Ajax'
 import SetUrl from 'Util/SetUrl'
 import { injectStripe } from 'react-stripe-elements'
 
-import 'css/main.css'
-import 'css/logo.css'
-import 'css/form.css'
-
 class CreditCard extends React.Component {
 	constructor(props) {
 		super(props)
