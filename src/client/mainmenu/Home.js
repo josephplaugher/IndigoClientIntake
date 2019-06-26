@@ -5,8 +5,6 @@ import CreditCard from './CreditCard'
 import ACHHome from './ACHHome'
 import { Elements } from 'react-stripe-elements'
 
-import { StripeProvider } from 'react-stripe-elements'
-
 class Home extends React.Component {
 	constructor(props) {
 		super(props)
@@ -18,8 +16,6 @@ class Home extends React.Component {
 				<Router>
 					{/* prettier-ignore */}
 					<div id="nav-pane">        
-
-		<StripeProvider apiKey={this.stripeKey}>
           <Link to="/cc" className="nav">Pay With Credit Card</Link>
             <Route path="/cc" 
               render={(props) => <Elements><CreditCard {...props} method="CC"/></Elements>}
@@ -28,7 +24,6 @@ class Home extends React.Component {
             <Route path="/ach" 
               render={(props) => <Elements><ACHHome userData={this.props.userData} method="ACH"/></Elements>}
               />
-		</StripeProvider>
         </div>
 				</Router>
 			</div>

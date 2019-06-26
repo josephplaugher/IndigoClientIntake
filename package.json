@@ -1,6 +1,5 @@
 {
-	"type": "module",
-	"name": "payments",
+	"name": "indigo",
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {

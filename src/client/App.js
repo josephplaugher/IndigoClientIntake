@@ -8,6 +8,7 @@ import checkLoginState from 'Util/CheckLoginState'
 import Home from './mainmenu/Home'
 import Login from './Login'
 import NewUser from './NewUser'
+import { StripeProvider } from 'react-stripe-elements'
 // import Logo from './AppreciateLogo.png'
 
 import 'css/main.css'
@@ -24,9 +25,9 @@ class AppreciateCo extends FormClass {
 		this.state = {
 			error: null,
 			userNotify: {},
-			isLoggedIn: true,
+			isLoggedIn: false,
 			newUser: false,
-			login: false,
+			login: true,
 			userData: {},
 			email: '',
 			password: ''
@@ -79,7 +80,9 @@ class AppreciateCo extends FormClass {
 				// token: res.data.token,
 				userNotify: res.data.userNotify,
 				userData: res.data.userData,
-				isLoggedIn: true
+				isLoggedIn: true,
+				login: false,
+				newUser: false
 			})
 		}
 		if (res.error) {
@@ -129,11 +132,13 @@ class AppreciateCo extends FormClass {
 				<div>
 					{this.state.isLoggedIn ? (
 						<EB comp='Home'>
-							<Home
-								userData={this.state.userData}
-								resfreshSources={this.refreshStripeSources}
-								signOut={this.signOut}
-							/>
+							<StripeProvider apiKey={this.stripeKey}>
+								<Home
+									userData={this.state.userData}
+									resfreshSources={this.refreshStripeSources}
+									signOut={this.signOut}
+								/>
+							</StripeProvider>
 						</EB>
 					) : null}
 					{this.state.login ? (
