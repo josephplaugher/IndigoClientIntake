@@ -1,4 +1,6 @@
 import React from 'react'
+import SetUrl from 'Util/SetUrl'
+import Ajax from 'Util/Ajax'
 
 import 'css/quest.scss'
 
@@ -15,6 +17,46 @@ class Quest extends React.Component {
 			total: 0
 		}
 		this.handleChange = this.handleChange.bind(this)
+		this.updateList = this.updateList.bind(this)
+		this.getDecorList = this.getDecorList.bind(this)
+	}
+
+	componentDidMount() {
+		console.log('node env: ', process.env.NODE_ENV)
+		this.getDecorList()
+	}
+
+	getDecorList() {
+		Ajax.get(SetUrl() + '/getDecorList')
+			.catch((error) => {
+				reject('error geting decor list: ', error)
+			})
+			.then((resp) => {
+				console.log('get decor list', resp)
+				this.updateList(resp.data.list)
+			})
+	}
+
+	updateList(list) {
+		let display = list.map((item) => (
+			<div className='item-row' key={`${item.item}-div`}>
+				<p key={`${item.item}-p`} className='item-p'>
+					{item.item}
+				</p>
+				<p key={`${item.price}-p`} className='price-p'>
+					${item.price}
+				</p>
+				<input
+					type='checkbox'
+					className='item-check'
+					name={item.item}
+					id={item.price}
+					value={this.state.item}
+					onChange={this.handleChange}
+				/>
+			</div>
+		))
+		this.setState({ display: display })
 	}
 
 	handleChange(event) {
@@ -38,25 +80,6 @@ class Quest extends React.Component {
 			[name]: value,
 			total: parseFloat(total)
 		})
-	}
-
-	componentDidMount() {
-		let display = this.state.temp.map((item) => (
-			<div className='item-row' key={`${item.item}-div`}>
-				<p key={`${item.item}-p`} className='item-p'>{`${item.item} | $${
-					item.price
-				} `}</p>
-				<input
-					type='checkbox'
-					className='item-check'
-					name={item.item}
-					id={item.price}
-					value={this.state.item}
-					onChange={this.handleChange}
-				/>
-			</div>
-		))
-		this.setState({ display: display })
 	}
 
 	render() {

@@ -15,7 +15,7 @@ import 'css/main.scss'
 import 'css/form.scss'
 import 'css/userNotify.scss'
 
-class AppreciateCo extends FormClass {
+class App extends FormClass {
 	constructor(props) {
 		super(props)
 		this.useLiveSearch = false
@@ -164,4 +164,4 @@ class AppreciateCo extends FormClass {
 	}
 }
 
-export default AppreciateCo
+export default App

@@ -14,10 +14,15 @@
 }
 
 .item-p,
+.price-p,
 .item-check {
 	display: inline-block;
 	margin: 5px;
 	color: $font-color;
+}
+
+.price-p {
+	float: right;
 }
 
 .item-check {

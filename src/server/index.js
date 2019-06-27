@@ -8,6 +8,7 @@ const Auth = require('./util/Auth.js')
 const userCont = require('./controllers/userCont.js')
 const achCont = require('./controllers/achCont.js')
 const ccCont = require('./controllers/ccCont.js')
+const decorCont = require('./controllers/decorCont.js')
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
@@ -42,6 +43,7 @@ app.get('/checkLoginState', checkAuth, (req, res) => {
 })
 
 app.use('/', userCont)
+app.use('/', decorCont)
 app.use('/', checkAuth, achCont)
 app.use('/', checkAuth, ccCont)
 
