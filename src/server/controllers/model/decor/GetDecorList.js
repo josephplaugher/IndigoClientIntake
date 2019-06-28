@@ -5,7 +5,7 @@ const GetDecorList = (req, res) => {
 	console.log('getting decor list')
 	Conn.query('SELECT item, price, category FROM decor')
 		.then((data) => {
-			console.log('decor list in db', data.rows)
+			// console.log('decor list in db', data.rows)
 			//Log.Info({ message: req.headers })
 			res.status(200).json({ list: data.rows })
 		})
