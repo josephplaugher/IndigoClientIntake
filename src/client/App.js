@@ -8,8 +8,6 @@ import checkLoginState from 'Util/CheckLoginState'
 import Home from './mainmenu/Home'
 import Login from './Login'
 import NewUser from './NewUser'
-// import AdminLogin from './mainmenu/AdminLogin'
-// import AdminHome from './mainmenu/AdminHome'
 import { StripeProvider } from 'react-stripe-elements'
 // import Logo from './AppreciateLogo.png'
 
@@ -129,7 +127,6 @@ class App extends FormClass {
 	render() {
 		return (
 			<div id='container'>
-				<h3>Stripe is commented out</h3>
 				<div id='logoBox'>
 					<img alt='company logo here' />
 				</div>
@@ -161,22 +158,6 @@ class App extends FormClass {
 							/>
 						</>
 					) : null}
-					{/* {this.state.adminLogin ? (
-						<>
-							<AdminLogin
-								response={this.newUserResponse}
-								switchToLogin={this.switchToLogin}
-							/>
-						</>
-					) : null}
-					{this.state.adminHome ? (
-						<>
-							<AdminHome
-								userData={this.state.userData}
-								signOut={this.signOut}
-							/>
-						</>
-					) : null} */}
 				</div>
 			</div>
 		)
