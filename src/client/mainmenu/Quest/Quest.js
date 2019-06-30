@@ -2,17 +2,10 @@ import React from 'react'
 import SetUrl from 'Util/SetUrl'
 import Ajax from 'Util/Ajax'
 
-import 'css/quest.scss'
-
 class Quest extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			temp: [
-				{ item: 'item 1', price: 100.0, checked: false },
-				{ item: 'item 2', price: 200.0, checked: false },
-				{ item: 'item 3', price: 300.0, checked: false }
-			],
 			display: [],
 			total: 0
 		}
@@ -22,7 +15,6 @@ class Quest extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('node env: ', process.env.NODE_ENV)
 		this.getDecorList()
 	}
 

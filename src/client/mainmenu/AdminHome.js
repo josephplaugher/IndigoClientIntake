@@ -1,10 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import User from './User'
-import Quest from './Quest/Quest'
+import QuestAdmin from './Quest/QuestAdmin'
 import CreditCard from './payment/CreditCard'
 import ACHHome from './payment/ACHHome'
 import { Elements } from 'react-stripe-elements'
+
+import 'css/admin-main.scss'
 
 class AdminHome extends React.Component {
 	constructor(props) {
@@ -12,23 +14,20 @@ class AdminHome extends React.Component {
 	}
 	render() {
 		return (
-			<div id='home-container'>
+			<div id='admin-home-container'>
 				<User userData={this.props.userData} signOut={this.props.signOut} />
 				<Router>
 					{/* prettier-ignore */}
-					<div id="nav-pane">  
-					<Link to="/quest" className="nav">Questionaire</Link>
-            			<Route path="/quest" 
-						render={(props) => <Quest />}
+					<div id="admin-nav-pane">  
+					<Link to="/options" className="nav">Decor Options</Link>
+            			<Route path="/options" 
+						render={(props) => <QuestAdmin />}
+						/>   
+					<Link to="/contracts" className="nav">Contracts</Link>
+            			<Route path="/contracts" 
+						render={(props) => <div>This can be whatever you want it to be. List of contracts pending signature, a place to edit your standard contract, etc...</div>}
 						/>      
-					<Link to="/cc" className="nav">Pay With Credit Card</Link>
-						<Route path="/cc" 
-						render={(props) => <Elements><CreditCard {...props} method="CC"/></Elements>}
-						/>
-					<br/><Link to="/ach" className="nav">Pay With ACH</Link>
-						<Route path="/ach" 
-						render={(props) => <Elements><ACHHome userData={this.props.userData} method="ACH"/></Elements>}
-					/>
+				
 					</div>
 				</Router>
 			</div>

@@ -119,6 +119,7 @@ class App extends FormClass {
 		sessionStorage.removeItem(process.env.TOKEN_NAME)
 		this.setState({
 			isLoggedIn: false,
+			login: true,
 			userData: {}
 		})
 		Ajax.get(SetUrl() + '/user/logout')

@@ -1,11 +1,19 @@
 import React from 'react'
 
-const UserNotify = (props) => {
-	if (props.type === 'error') {
-		return <p className='error'>{props.error}</p>
+class UserNotify extends React.Component {
+	constructor(props) {
+		super(props)
 	}
-	if (props.type === 'message') {
-		return <p className='userNotify'>{props.message}</p>
+
+	render() {
+		var returnObj = null
+		if (this.props.userNotify.error) {
+			returnObj = <p className='error'>{this.props.userNotify.error}</p>
+		}
+		if (this.props.userNotify.message) {
+			returnObj = <p className='userNotify'>{this.props.userNotify.message}</p>
+		}
+		return { returnObj }
 	}
 }
 
