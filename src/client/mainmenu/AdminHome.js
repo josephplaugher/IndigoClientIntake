@@ -25,16 +25,9 @@ class AdminHome extends React.Component {
 						/>   
 					<Link to="/contracts" className="nav">Contracts</Link>
             			<Route path="/contracts" 
-						render={(props) => <div>contracts</div>}
+						render={(props) => <div>This can be whatever you want it to be. List of contracts pending signature, a place to edit your standard contract, etc...</div>}
 						/>      
-					{/* <Link to="/cc" className="nav">Pay With Credit Card</Link>
-						<Route path="/cc" 
-						render={(props) => <Elements><CreditCard {...props} method="CC"/></Elements>}
-						/>
-					<br/><Link to="/ach" className="nav">Pay With ACH</Link>
-						<Route path="/ach" 
-						render={(props) => <Elements><ACHHome userData={this.props.userData} method="ACH"/></Elements>}
-					/> */}
+				
 					</div>
 				</Router>
 			</div>

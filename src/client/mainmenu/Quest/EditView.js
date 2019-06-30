@@ -2,7 +2,6 @@ import React from 'react'
 import { FormClass, Input, Button } from 'reactform-appco'
 import ValRules from 'Util/ValRules'
 import UserNotify from 'Util/UserNotify'
-import EB from 'Util/EB'
 
 class EditView extends FormClass {
 	constructor(props) {
@@ -10,23 +9,27 @@ class EditView extends FormClass {
 		this.useLiveSearch = false
 		this.route = '/editItem'
 		this.valRules = ValRules
+		this.extraData = { id: this.props.data.id }
 		this.state = {
-			userNotify: {},
+			userNotify: { error: '', message: '' },
 			item: this.props.data.item,
 			price: this.props.data.price,
 			category: this.props.data.category,
-			id: this.props.data.id
+			id: this.props.data.id,
+			formData: {
+				item: this.props.data.item,
+				price: this.props.data.price,
+				category: this.props.data.category,
+				id: this.props.data.id
+			}
 		}
 		this.response = this.response.bind(this)
 	}
 
 	response(resp) {
-		if (resp.data.error) {
-			this.setState({ userNotify: { error: error } })
-		} else {
-			this.setState({ userNotify: { message: message } })
-			this.props.refreshOptions()
-		}
+		this.setState({ userNotify: resp.data.userNotify })
+		this.props.refreshOptions()
+		this.props.close()
 	}
 
 	render() {
@@ -34,7 +37,7 @@ class EditView extends FormClass {
 			<div id='edit-view'>
 				<p className='form-title'>Edit Item | ID: {this.state.id}</p>
 				{/* prettier-ignore */}
-				<UserNotify error={this.state.userNotify.error} message={this.state.userNotify.message} />
+				{/* <UserNotify userNotify={this.state.userNotify} /> */}
 				<form onSubmit={this.rfa_onSubmit}>
 					<Input
 						name='item'

@@ -37,7 +37,6 @@ class QuestAdmin extends React.Component {
 	}
 
 	updateItem(event) {
-		console.log('event target: ', event.target.id)
 		this.setState({ editView: true, editData: JSON.parse(event.target.id) })
 	}
 
@@ -49,7 +48,7 @@ class QuestAdmin extends React.Component {
 
 	render() {
 		let display = this.state.list.map((item) => (
-			<div className='item-row' key={`${item.item}-div`}>
+			<div className='item-row' key={`${item.id}-div`}>
 				<p key={`${item.item}-p`} className='item-p'>
 					{item.item}
 				</p>
@@ -93,9 +92,12 @@ class QuestAdmin extends React.Component {
 							left: '20'
 						}}
 						close={this.closeLightBox}
-						refreshOptions={this.getDecorList}
 					>
-						<EditView data={this.state.editData} />
+						<EditView
+							data={this.state.editData}
+							refreshOptions={this.getDecorList}
+							close={this.closeLightBox}
+						/>
 					</LightBox>
 				) : null}
 			</div>
