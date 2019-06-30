@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'reactform-appco'
 
-import 'css/user.scss'
-
 class User extends Component {
 	constructor(props) {
 		super(props)
@@ -12,9 +10,16 @@ class User extends Component {
 	}
 
 	render() {
-		const signed = `Current User: ${this.props.userData.lname}, ${
-			this.props.userData.fname
-		}`
+		var signed
+		if (this.props.admin) {
+			signed = `Current User: ${this.props.userData.lname}, ${
+				this.props.userData.fname
+			}: Administrator`
+		} else {
+			signed = `Current User: ${this.props.userData.lname}, ${
+				this.props.userData.fname
+			}`
+		}
 
 		return (
 			<div id='user'>

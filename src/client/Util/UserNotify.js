@@ -1,12 +1,14 @@
 import React from 'react'
 
 const UserNotify = (props) => {
+	var returnObj = null
 	if (props.type === 'error') {
-		return <p className='error'>{props.error}</p>
+		returnObj = <p className='error'>{props.error}</p>
 	}
 	if (props.type === 'message') {
-		return <p className='userNotify'>{props.message}</p>
+		returnObj = <p className='userNotify'>{props.message}</p>
 	}
+	return returnObj
 }
 
 export default UserNotify

@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const UserBase = require('./UserBase.js')
+const Conn = require('./../../../util/Postgres')
+const Log = require('./../../../util/Log')
 
 class Login extends UserBase {
 	constructor(req, res) {
@@ -16,10 +18,30 @@ class Login extends UserBase {
 		// since that is stored separately and used for searching.
 		// finally, we add their list of payment sources for use
 		// on the client side.
-		let users = await this.getCustomersByEmail()
-		let user = users.data[0]
-		let userData = this.buildUserObject(user)
-		this.checkPassword(this.req, this.res, userData)
+		let admin = await this.isUserAdmin()
+		if (admin) {
+			// if the user is an admin, pull their userdata from Postgres
+			this.checkPassword(this.req, this.res, admin)
+		} else {
+			// if the user is not an admin, they're a customer so pull their data from Stripe
+			let users = await this.getCustomersByEmail()
+			let user = users.data[0]
+			let userData = this.buildUserObject(user)
+			this.checkPassword(this.req, this.res, userData)
+		}
+	}
+
+	isUserAdmin() {
+		return new Promise((resolve, reject) => {
+			const query = {
+				text:
+					'SELECT id, email, lname, fname, password, admin FROM users WHERE email = $1 ',
+				values: [this.req.body.email.toLowerCase()]
+			}
+			Conn.query(query)
+				.then((data) => resolve(data.rows[0]))
+				.catch((e) => console.error(e.stack))
+		})
 	}
 
 	checkPassword(req, res, userData) {
