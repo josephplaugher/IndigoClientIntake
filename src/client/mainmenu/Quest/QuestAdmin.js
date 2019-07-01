@@ -1,9 +1,12 @@
 import React from 'react'
 import { FormClass, Input, Button } from 'reactform-appco'
+import ReactTable from 'react-table'
 import SetUrl from 'Util/SetUrl'
 import Ajax from 'Util/Ajax'
 import LightBox from 'lightbox-appco'
 import EditView from './EditView'
+
+import 'react-table/react-table.css'
 
 class QuestAdmin extends React.Component {
 	constructor(props) {
@@ -37,7 +40,7 @@ class QuestAdmin extends React.Component {
 	}
 
 	updateItem(event) {
-		this.setState({ editView: true, editData: JSON.parse(event.target.id) })
+		this.setState({ editView: true, editData: event })
 	}
 
 	closeLightBox() {
@@ -47,32 +50,48 @@ class QuestAdmin extends React.Component {
 	changeItem() {}
 
 	render() {
-		let display = this.state.list.map((item) => (
-			<div className='item-row' key={`${item.id}-div`}>
-				<p key={`${item.item}-p`} className='item-p'>
-					{item.item}
-				</p>
-				<p key={`${item.category}-p`} className='item-p'>
-					{`Category: ${item.category} `}
-				</p>
-				<p key={`${item.price}-p`} className='price-p'>
-					${item.price}
-				</p>
-				<div className='rfa_button-div'>
-					<Button
-						value='Update'
-						id={JSON.stringify(item)}
-						onClick={this.updateItem}
-					/>
-				</div>
-			</div>
-		))
+		// let display = this.state.list.map((item) => (
+		// 	<div className='item-row' key={`${item.id}-div`}>
+		// 		<p key={`${item.item}-p`} className='item-p'>
+		// 			{item.item}
+		// 		</p>
+		// 		<p key={`${item.category}-p`} className='item-p'>
+		// 			{`Category: ${item.category} `}
+		// 		</p>
+		// 		<p key={`${item.price}-p`} className='price-p'>
+		// 			${item.price}
+		// 		</p>
+		// 		<div className='rfa_button-div'>
+		// 			<Button
+		// 				value='Update'
+		// 				id={JSON.stringify(item)}
+		// 				onClick={this.updateItem}
+		// 			/>
+		// 		</div>
+		// 	</div>
+		// ))
+		const columns = [
+			{ Header: 'Item', accessor: 'item' },
+			{ Header: 'Category', accessor: 'catergory' },
+			{ Header: 'Price', accessor: 'price' }
+		]
 
 		return (
 			<div id='questionaire-main'>
 				<div id='options-main'>
 					<p className='text'>Add or edit decor options</p>
-					{display}
+					<ReactTable
+						filterable
+						getTdProps={(state, rowInfo, column, instance) => {
+							return {
+								onClick: (e, handleOriginal) => {
+									this.updateItem(rowInfo.original)
+								}
+							}
+						}}
+						data={this.state.list}
+						columns={columns}
+					/>
 				</div>
 				{this.state.editView ? (
 					<LightBox
