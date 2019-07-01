@@ -50,26 +50,6 @@ class QuestAdmin extends React.Component {
 	changeItem() {}
 
 	render() {
-		// let display = this.state.list.map((item) => (
-		// 	<div className='item-row' key={`${item.id}-div`}>
-		// 		<p key={`${item.item}-p`} className='item-p'>
-		// 			{item.item}
-		// 		</p>
-		// 		<p key={`${item.category}-p`} className='item-p'>
-		// 			{`Category: ${item.category} `}
-		// 		</p>
-		// 		<p key={`${item.price}-p`} className='price-p'>
-		// 			${item.price}
-		// 		</p>
-		// 		<div className='rfa_button-div'>
-		// 			<Button
-		// 				value='Update'
-		// 				id={JSON.stringify(item)}
-		// 				onClick={this.updateItem}
-		// 			/>
-		// 		</div>
-		// 	</div>
-		// ))
 		const columns = [
 			{ Header: 'Item', accessor: 'item' },
 			{ Header: 'Category', accessor: 'catergory' },
