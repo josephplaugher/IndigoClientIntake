@@ -1,4 +1,5 @@
 const SetStripeKey = require('./../SetStripeKey.js')
+const bcryptjs = require('bcryptjs')
 
 class UserBase {
 	constructor(req, res) {
@@ -9,7 +10,6 @@ class UserBase {
 
 	getCustomersByEmail() {
 		let customer = new Promise((resolve, reject) => {
-			var self = this
 			this.stripe.customers.list(
 				{ email: this.req.body.email },
 				(error, customers) => {
@@ -31,6 +31,19 @@ class UserBase {
 		userData['email'] = u.email
 		userData['sources'] = u.sources
 		return userData
+	}
+
+	passwordHash(input) {
+		return new Promise((resolve, reject) => {
+			bcryptjs.hash(input, 14, (error, hashed) => {
+				if (error) {
+					console.log('password hash error: ', error)
+					reject(error)
+				} else {
+					resolve(hashed)
+				}
+			})
+		})
 	}
 }
 

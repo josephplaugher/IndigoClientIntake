@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import User from './User'
-import QuestAdmin from './Quest/QuestAdmin'
+import QuestAdmin from './admin/QuestAdmin'
+import NewClient from './admin/NewClient'
 import CreditCard from './payment/CreditCard'
 import ACHHome from './payment/ACHHome'
 import { Elements } from 'react-stripe-elements'
@@ -23,6 +24,10 @@ class AdminHome extends React.Component {
             			<Route path="/options" 
 						render={(props) => <QuestAdmin />}
 						/>   
+					<Link to="/newClient" className="nav">Add New Client</Link>
+            			<Route path="/newClient" 
+						render={(props) => <NewClient />}
+						/>  
 					<Link to="/contracts" className="nav">Contracts</Link>
             			<Route path="/contracts" 
 						render={(props) => <div>This can be whatever you want it to be. List of contracts pending signature, a place to edit your standard contract, etc...</div>}

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const SetUrl = require('./util/SetUrl.js')
 const Auth = require('./util/Auth.js')
 const userCont = require('./controllers/userCont.js')
+const clientCont = require('./controllers/clientCont.js')
 const achCont = require('./controllers/achCont.js')
 const ccCont = require('./controllers/ccCont.js')
 const decorCont = require('./controllers/decorCont.js')
@@ -43,7 +44,8 @@ app.get('/checkLoginState', checkAuth, (req, res) => {
 })
 
 app.use('/', userCont)
-app.use('/', decorCont)
+app.use('/', checkAuth, clientCont)
+app.use('/', checkAuth, decorCont)
 app.use('/', checkAuth, achCont)
 app.use('/', checkAuth, ccCont)
 
