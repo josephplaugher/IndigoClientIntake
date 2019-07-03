@@ -32,11 +32,11 @@ class Quest extends React.Component {
 	updateList(list) {
 		let display = list.map((item) => (
 			<div className='item-row' key={`${item.item}-div`}>
-				<p key={`${item.item}-p`} className='item-p'>
+				<p key={`${item.id}-p`} className='item-p'>
 					{item.item}
 				</p>
-				<p key={`${item.price}-p`} className='price-p'>
-					${item.price}
+				<p key={`${item.category}-p`} className='item-p'>
+					{` | ${item.category}`}
 				</p>
 				<input
 					type='checkbox'
@@ -46,6 +46,9 @@ class Quest extends React.Component {
 					value={this.state.item}
 					onChange={this.handleChange}
 				/>
+				<p key={`${item.price}-p`} className='price-p'>
+					${item.price}
+				</p>
 			</div>
 		))
 		this.setState({ display: display })

@@ -130,6 +130,7 @@ class App extends FormClass {
 			<div id='container'>
 				<div id='logoBox'>
 					<img alt='company logo here' />
+					make the auth process run for all db entries!
 				</div>
 				<div>
 					{this.state.isLoggedIn ? (

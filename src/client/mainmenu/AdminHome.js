@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import User from './User'
 import QuestAdmin from './admin/QuestAdmin'
 import NewClient from './admin/NewClient'
+import BuildQuote from './admin/BuildQuote'
 import CreditCard from './payment/CreditCard'
 import ACHHome from './payment/ACHHome'
 import { Elements } from 'react-stripe-elements'
@@ -24,9 +25,13 @@ class AdminHome extends React.Component {
             			<Route path="/options" 
 						render={(props) => <QuestAdmin />}
 						/>   
-					<Link to="/newClient" className="nav">Add New Client</Link>
-            			<Route path="/newClient" 
+					<Link to="/new-client" className="nav">Add New Client</Link>
+            			<Route path="/new-client" 
 						render={(props) => <NewClient />}
+						/>  
+					<Link to="/build-quote" className="nav">Build A Quote</Link>
+            			<Route path="/build-quote" 
+						render={(props) => <BuildQuote />}
 						/>  
 					<Link to="/contracts" className="nav">Contracts</Link>
             			<Route path="/contracts" 

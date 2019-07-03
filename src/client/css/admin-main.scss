@@ -8,15 +8,15 @@
 }
 
 #user {
-	grid-column-start: 5;
+	grid-column-start: 4;
 	grid-column-end: column5-end;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 
 #admin-nav-pane {
-	grid-column-start: 1;
-	grid-column-end: 6;
+	grid-column-start: 2;
+	grid-column-end: 5;
 	grid-row-start: 3;
 	grid-row-end: row3-end;
 	margin: 10px;
@@ -46,7 +46,7 @@
 .item-p,
 .price-p,
 .item-check {
-	display: inline-block;
+	display: inline;
 	margin: 5px;
 	color: $font-color;
 }

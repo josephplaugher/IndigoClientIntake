@@ -11,7 +11,11 @@ class User extends Component {
 
 	render() {
 		var signed
-		if (this.props.admin) {
+		if (
+			this.props.admin === true ||
+			this.props.admin === 'true' ||
+			this.props.admin === 't'
+		) {
 			signed = `Current User: ${this.props.userData.lname}, ${
 				this.props.userData.fname
 			}: Administrator`
