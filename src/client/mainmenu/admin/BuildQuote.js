@@ -28,6 +28,8 @@ class BuildQuote extends FormClass {
 		this.handleChange = this.handleChange.bind(this)
 		this.updateList = this.updateList.bind(this)
 		this.getDecorList = this.getDecorList.bind(this)
+		this.saveForLater = this.saveForLater.bind(this)
+		this.setSendNow = this.setSendNow.bind(this)
 		this.response = this.response.bind(this)
 	}
 
@@ -96,6 +98,18 @@ class BuildQuote extends FormClass {
 		this.extraData = { selections: newSelections }
 	}
 
+	saveForLater() {
+		let extraData = Object.assign({}, this.extraData)
+		extraData.saveForLater = true
+		this.extraData = extraData
+	}
+
+	setSendNow() {
+		let extraData = Object.assign({}, this.extraData)
+		extraData.saveForLater = false
+		this.extraData = extraData
+	}
+
 	response(resp) {
 		console.log('the quote response: ', resp)
 	}
@@ -117,7 +131,10 @@ class BuildQuote extends FormClass {
 						}`}</p>
 					</div>
                     <div className="rfa_button-div">
-                        <Button id="submit" value="Complete and Send" />
+                        <Button id="submit" value="Complete and Send" onClick={this.setSendNow}/>
+                    </div>
+					<div className="rfa_button-div">
+                        <Button id="submit" value="Save and Send Later" onClick={this.saveForLater} />
                     </div>
                    
 				</form>

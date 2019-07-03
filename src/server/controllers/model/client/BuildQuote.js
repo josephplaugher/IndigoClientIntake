@@ -1,5 +1,5 @@
 const SetStripeKey = require('../SetStripeKey.js')
-const moment = require('moment')
+const uuid = require('uuid/v4') // general use random id
 const Conn = require('../../../util/Postgres')
 const Log = require('../../../util/Log')
 const SendEmail = require('./../../../util/SendEmail')
@@ -12,13 +12,19 @@ class BuildQuote {
 	}
 
 	async saveAndSend() {
-		this.quoteId = moment().calendar() + this.req.body.lname
+		this.quoteId = uuid()
 		let itemIds = this.req.body.selections
 		let i = 0
 		for (i = 0; i < itemIds.length; i++) {
 			let inserted = await this.enterQuoteRow(itemIds[i])
 		}
-		this.sendQuote()
+		if (this.req.body.saveForLater) {
+			this.res.status(200).json({
+				userNotfy: { message: 'The quote has been saved.' }
+			})
+		} else {
+			this.sendQuote()
+		}
 	}
 
 	enterQuoteRow(itemId) {

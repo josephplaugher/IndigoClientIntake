@@ -38,6 +38,7 @@
 		"reactform-appco": "^1.0.8",
 		"router-express": "^1.5.2",
 		"stripe": "^6.23.1",
+		"uuid": "^3.3.2",
 		"winston": "^3.2.1"
 	},
 	"devDependencies": {
