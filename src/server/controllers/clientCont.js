@@ -1,6 +1,7 @@
 const express = require('express')
 const NewClient = require('./model/user/NewClient')
 const BuildQuote = require('./model/client/BuildQuote')
+const RetrieveQuote = require('./model/client/RetrieveQuote')
 
 const routes = express.Router()
 
@@ -13,5 +14,7 @@ routes.post('/buildQuote', (req, res) => {
 	const Quote = new BuildQuote(req, res)
 	Quote.saveAndSend()
 })
+
+routes.get('/quoteID/:quoteID', RetrieveQuote)
 
 module.exports = routes

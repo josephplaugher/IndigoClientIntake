@@ -44,7 +44,7 @@ app.get('/checkLoginState', checkAuth, (req, res) => {
 })
 
 app.use('/', userCont)
-app.use('/', checkAuth, clientCont)
+app.use('/', clientCont)
 app.use('/', checkAuth, decorCont)
 app.use('/', checkAuth, achCont)
 app.use('/', checkAuth, ccCont)
