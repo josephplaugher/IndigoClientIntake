@@ -1,5 +1,7 @@
+@import 'fonts.scss';
+
 .form-title {
-	color: #2665c4;
+	color: $font-color;
 	font-size: 18px;
 	text-align: left;
 	padding-left: 30px;
@@ -8,8 +10,8 @@
 .rfa_textinput {
 	border-top: 0px;
 	border-right: 0px;
-	border-left: 0.5px solid #2665c4;
-	border-bottom: 0.5px solid #2665c4;
+	border-left: 0.5px solid $font-color;
+	border-bottom: 0.5px solid $font-color;
 	border-radius: 5px;
 	padding: 8px;
 }
@@ -17,8 +19,8 @@
 .stripecctextinput {
 	border-top: 0px;
 	border-right: 0px;
-	border-left: 0.5px solid #2665c4;
-	border-bottom: 0.5px solid #2665c4;
+	border-left: 0.5px solid $font-color;
+	border-bottom: 0.5px solid $font-color;
 	border-radius: 5px;
 	padding: 10px;
 }
@@ -26,8 +28,8 @@
 .readonlytextinput {
 	border-top: 0px;
 	border-right: 0px;
-	border-left: 0.5px solid #2665c4;
-	border-bottom: 0.5px solid #2665c4;
+	border-left: 0.5px solid $font-color;
+	border-bottom: 0.5px solid $font-color;
 	border-radius: 5px;
 	padding: 10px;
 	background-color: #aeaeae80;
@@ -43,7 +45,7 @@
 }
 
 .rfa_label {
-	color: #2665c4;
+	color: $font-color;
 	position: absolute;
 	margin-top: -15px;
 	margin-left: 10px;
@@ -70,7 +72,7 @@
 }
 
 .success-msg {
-	color: #2665c4;
+	color: $font-color;
 }
 
 .rfa_submit {
@@ -79,7 +81,7 @@
 	cursor: pointer;
 	background-color: white;
 	border-radius: 5px;
-	border-color: #2665c4;
+	border-color: $font-color;
 	border-style: solid;
 	border-width: 2px;
 }
@@ -90,6 +92,6 @@
 }
 
 .text {
-	color: #2665c4;
+	color: $font-color;
 	font-size: 12px;
 }

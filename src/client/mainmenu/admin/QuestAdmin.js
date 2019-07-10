@@ -57,11 +57,12 @@ class QuestAdmin extends React.Component {
 		]
 
 		return (
-			<div id='questionaire-main'>
+			<>
 				<div id='options-main'>
 					<p className='text'>Add or edit decor options</p>
 					<ReactTable
 						filterable
+						minRows={0}
 						getTdProps={(state, rowInfo, column, instance) => {
 							return {
 								onClick: (e, handleOriginal) => {
@@ -99,7 +100,7 @@ class QuestAdmin extends React.Component {
 						/>
 					</LightBox>
 				) : null}
-			</div>
+			</>
 		)
 	}
 }

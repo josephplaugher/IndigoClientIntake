@@ -28,12 +28,7 @@ class User extends Component {
 		return (
 			<div id='user'>
 				<p>{signed}</p>
-				<Button
-					id='sign out'
-					className='submit'
-					value='Sign Out'
-					onClick={this.props.signOut}
-				/>
+				<Button id='sign out' value='Sign Out' onClick={this.props.signOut} />
 			</div>
 		)
 	}

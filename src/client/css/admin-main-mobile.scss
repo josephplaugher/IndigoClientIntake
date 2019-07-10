@@ -1,0 +1,88 @@
+@import 'fonts.scss';
+
+@media screen and (max-width: 700px) {
+	#admin-home-container {
+		display: grid;
+		grid-template-columns: 10% 10% auto 10% 10%;
+		grid-template-rows: 20% auto 5%;
+		padding: 1px;
+	}
+
+	#menu-container {
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	#user {
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	#admin-nav-pane {
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		grid-row-start: 3;
+		grid-row-end: row3-end;
+	}
+
+	.submenu {
+		padding: 10px;
+	}
+
+	#options-main {
+		padding: 10px;
+		display: grid;
+		grid-column-start: 1;
+		grid-column-end: 6;
+	}
+
+	.item-row {
+		border: 0.5px solid $font-color;
+		border-radius: 5px;
+		padding: 8px;
+		margin: 8px;
+		font-size: 12px;
+		grid-column-start: 2;
+		grid-column-end: 5;
+	}
+
+	.item-p,
+	.price-p,
+	.item-check {
+		display: inline;
+		margin: 5px;
+		color: $font-color;
+	}
+
+	.price-p {
+		float: right;
+	}
+
+	.item-check {
+		float: right;
+	}
+
+	.rfa_input-container {
+		margin: 12px;
+	}
+
+	.rfa_textinput {
+		border-top: 0px;
+		border-right: 0px;
+		border-left: 0.5px solid $font-color;
+		border-bottom: 0.5px solid $font-color;
+		border-radius: 5px;
+		padding: 8px;
+		display: inline-block;
+	}
+
+	.rfa_button-div,
+	.rfa_submit {
+		grid-column-start: 1;
+		grid-column-end: 2;
+	}
+}

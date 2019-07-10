@@ -4,20 +4,54 @@ import User from './User'
 import QuestAdmin from './admin/QuestAdmin'
 import NewClient from './admin/NewClient'
 import BuildQuote from './admin/BuildQuote'
+import { Menu, MenuButton } from 'menu-appco'
+import MenuSyle from './MenuStyle'
 import CreditCard from './payment/CreditCard'
 import ACHHome from './payment/ACHHome'
 import { Elements } from 'react-stripe-elements'
 
-import 'css/admin-main.scss'
+import 'css/admin-main-desktop.scss'
+import 'css/admin-main-mobile.scss'
 
 class AdminHome extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = { showUserMenu: false }
+		this.toggleUserMenu = this.toggleUserMenu.bind(this)
 	}
+
+	toggleUserMenu() {
+		if (this.state.showUserMenu === true) {
+			this.setState({ showUserMenu: false })
+		} else {
+			this.setState({ showUserMenu: true })
+		}
+	}
+
 	render() {
 		return (
 			<div id='admin-home-container'>
-				<User userData={this.props.userData} signOut={this.props.signOut} />
+				<div id='menu-container'>
+					<MenuButton
+						style={{ bordercolor: 'grey' }}
+						barStyle={{ backgroundColor: 'black' }}
+						onClick={this.toggleUserMenu}
+					/>
+					{this.state.showUserMenu ? (
+						<Menu
+							closeIcon={null}
+							showMenu={this.state.showUserMenu}
+							closeHandler={this.toggleUserMenu}
+							style={MenuSyle}
+						>
+							<User
+								closeHandler={this.toggleUserMenu}
+								userData={this.props.userData}
+								signOut={this.props.signOut}
+							/>
+						</Menu>
+					) : null}
+				</div>
 				<Router>
 					{/* prettier-ignore */}
 					<div id="admin-nav-pane">  
