@@ -80,10 +80,10 @@ class Quest extends React.Component {
 	render() {
 		return (
 			<div id='questionaire-main'>
-				<div id='options-main'>
+				<div>
 					<p className='text'>Select the options for your event</p>
-					{this.state.display}
 				</div>
+				<div id='options-main'>{this.state.display}</div>
 				<div id='price-main'>
 					<p className='text'>Total Estimated Cost: {this.state.total}</p>
 				</div>

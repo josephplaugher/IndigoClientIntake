@@ -1,0 +1,62 @@
+@import 'fonts.scss';
+
+@media screen and (max-width: 700px) {
+	#home-container {
+		display: grid;
+		grid-template-columns: 10% 10% auto 10% 10%;
+		grid-template-rows: 20% auto 5%;
+		padding: 1px;
+	}
+
+	#menu-container {
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	#user {
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+
+	#nav-pane {
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		grid-row-start: 3;
+		grid-row-end: row3-end;
+	}
+
+	.nav {
+		border: 0.5px solid $font-color;
+		border-radius: 5px;
+		color: $font-color;
+		font-size: 18px;
+		text-align: center;
+		display: block;
+		padding: 10px;
+		text-decoration: none;
+	}
+
+	#questionaire-main {
+		display: grid;
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+	}
+
+	.text {
+		font-size: 14px;
+		color: $font-color;
+		margin: 5px;
+	}
+
+	#form-container {
+		margin-top: 50px;
+	}
+
+	.userNotify {
+		color: red;
+	}
+}

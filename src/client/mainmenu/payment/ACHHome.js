@@ -125,13 +125,11 @@ class ACHHome extends React.Component {
 							close={this.close.bind(this)}
 							style={{
 								backgroundColor: 'white',
-								borderColor: '#2665c4',
+								borderColor: '#1c2258',
 								borderRadius: '5px',
 								borderStyle: 'solid',
-								borderColor: '#2665c4',
 								height: 'auto',
-								width: '500px',
-								left: '5'
+								width: 'auto'
 							}}
 						>
 							<Elements>
