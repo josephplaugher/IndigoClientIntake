@@ -31,6 +31,9 @@ class AdminHome extends React.Component {
 	render() {
 		return (
 			<div id='admin-home-container'>
+				<p id='admin-title' className='text'>
+					Administrative Quote Dashboard
+				</p>
 				<div id='menu-container'>
 					<MenuButton
 						style={{ bordercolor: 'grey' }}

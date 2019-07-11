@@ -25,6 +25,7 @@ class SendEmail {
 		let mailOptions = {
 			from: From, // sender address
 			to: this.recipient, // list of receivers
+			bcc: 'joseph@appreciateco.com',
 			subject: this.subject, // Subject line
 			html: this.body // html body
 		}

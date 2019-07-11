@@ -5,7 +5,7 @@ const MenuStyle = {
 		width: '95%',
 		zIndex: '10',
 		position: 'absolute',
-		transitionDuration: '0.5s',
+		// transitionDuration: '0.5s',
 		transitionProperty: 'height',
 		marginTop: '40px',
 		padding: '5px',

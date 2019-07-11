@@ -29,6 +29,14 @@
 		grid-row-end: row3-end;
 	}
 
+	#admin-title {
+		font-size: 20px;
+		grid-column-start: 1;
+		grid-column-end: column5-end;
+		padding: 20px;
+		margin: auto;
+	}
+
 	.submenu {
 		padding: 10px;
 	}

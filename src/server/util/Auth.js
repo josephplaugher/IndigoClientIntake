@@ -1,4 +1,4 @@
-const jwt = require( 'jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
 class Auth {
 	constructor(req, res, next) {
@@ -15,6 +15,7 @@ class Auth {
 	start() {
 		//check if cookie and token exist
 		if (this.req.cookies[this.cookieName] && this.req.headers.csrf) {
+			console.log('cookie and token exist')
 			this.compare()
 		} else {
 			this.unsetLoginHeaders()
@@ -26,10 +27,12 @@ class Auth {
 		const csrf = this.req.headers.csrf
 		//if cookie and token exist and the token is valid, check that they are the same
 		if (cookie.token === csrf) {
+			console.log('cookie and token are the same')
 			var verifiedToken
 			try {
 				verifiedToken = jwt.verify(csrf, process.env.JWT_SECRET)
 			} catch (error) {
+				console.log('cookie and token are NOT the same')
 				this.unsetLoginHeaders()
 			}
 			//if the token and cookie match, renew them
@@ -41,6 +44,7 @@ class Auth {
 
 	renewLogin(verifiedToken, prevCookiePayload) {
 		//upon authentication, renew the token and the cookie
+		console.log('user id for auth: ', verifiedToken.userData.id)
 		this.req.headers['stripeConn'] = verifiedToken.userData.id
 		delete verifiedToken.exp
 		var token = jwt.sign(
@@ -59,6 +63,7 @@ class Auth {
 	}
 
 	clearCurrentCookie() {
+		console.log('clearing the current cookie')
 		this.res.clearCookie(process.env.COOKIE_NAME, {
 			expires: new Date(Date.now() + 60 * 60 * 1000),
 			maxAge: 60 * 60 * 1000,
@@ -68,6 +73,8 @@ class Auth {
 	}
 
 	setNewCookie(token) {
+		console.log('setting the new cookie')
+
 		this.res.cookie(
 			process.env.COOKIE_NAME,
 			{ token: token },
@@ -81,12 +88,14 @@ class Auth {
 	}
 
 	setLoginHeaders(token) {
+		console.log('setting the login headers')
 		this.res.header(this.authorized, true)
 		this.res.header('token', token)
 		this.next()
 	}
 
 	unsetLoginHeaders() {
+		console.log('unsetting the login headers')
 		this.res.header(this.authorized, '')
 		this.res.header('token', '')
 		this.next()
