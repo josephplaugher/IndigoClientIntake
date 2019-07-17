@@ -16,21 +16,24 @@ class BuildQuote {
 		// first check stripe to see if this is a new or existing client.
 		// create the client is they're new
 		// and just retrieve their info if they're not new.
-		let Client = new NewClient(req, res)
+		let Client = new NewClient(this.req, this.res)
 		let doesUserExist = await Client.getCustomersByEmail()
+		var CurrentClient
 		if (doesUserExist.data[0]) {
-			const CurrentClient = doesUserExist.data[0]
+			CurrentClient = doesUserExist.data[0]
 		} else {
 			let password = await Client.passwordHash('password')
-			let CurrentClient = await Client.createClient(password)
+			CurrentClient = await Client.createClient(password)
 		}
 		// generate a quote id
 		this.quoteId = uuid()
+		//create the header row that contains generate quote info
+		let header = await this.enterQuoteHeader(CurrentClient)
+		// place the selection by id into a new array for iteration below
 		let itemIds = this.req.body.selections
 		let i = 0
 		for (i = 0; i < itemIds.length; i++) {
 			let inserted = await this.enterQuoteRow(itemIds[i])
-			let header = await this.enterQuoteHeader(CurrentClient)
 		}
 		if (this.req.body.saveForLater) {
 			this.res.status(200).json({
@@ -41,13 +44,14 @@ class BuildQuote {
 		}
 	}
 
-	enterQuoteRow(itemId) {
+	enterQuoteHeader(Client) {
 		return new Promise((resolve, reject) => {
+			let i = this.req.body
 			let Query = {
 				text: `INSERT INTO quotes
-                        (id, itemId, clientID)
-                        VALUES ($1,$2,$3)`,
-				values: [this.quoteId, itemId, this.req.body.email]
+                        (id, event_type, clientID, email, total_cost, header)
+                        VALUES ($1,$2,$3,$4,$5, 'true')`,
+				values: [this.quoteId, i.eventType, Client.id, i.email, i.total]
 			}
 			Conn.query(Query)
 				.catch((error) => {
@@ -65,14 +69,13 @@ class BuildQuote {
 		})
 	}
 
-	enterQuoteHeader(Client) {
+	enterQuoteRow(itemId) {
 		return new Promise((resolve, reject) => {
-			let i = this.req.body
 			let Query = {
 				text: `INSERT INTO quotes
-                        (id, event_type, clientID, total_cost, header)
-                        VALUES ($1,$2,$3,$4, 'true')`,
-				values: [this.quoteId, i.eventType, Client.id, i.totalCost]
+                        (id, itemId)
+                        VALUES ($1,$2)`,
+				values: [this.quoteId, itemId]
 			}
 			Conn.query(Query)
 				.catch((error) => {
@@ -110,7 +113,10 @@ class BuildQuote {
 			'Quote #' + this.quoteId, // the quote id
 			body //the email body as defined above
 		)
-		Mail.send()
+		let result = Mail.send()
+		this.res.status(200).json({
+			userNotfy: { message: result }
+		})
 	}
 }
 

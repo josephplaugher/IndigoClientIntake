@@ -34,16 +34,10 @@ class SendEmail {
 			if (error) {
 				console.error(error)
 				Log.error({ message: error.stack })
-				this.res.status(200).json({
-					userNotfy: {
-						error: 'Something went wrong, try again in a few minutes'
-					}
-				})
+				return 'Something went wrong, try again in a few minutes'
 			} else {
 				console.log('sent email data: ', info)
-				this.res.status(200).json({
-					userNotfy: { message: 'The quote has been sent to the client' }
-				})
+				return 'The quote has been sent to the client'
 			}
 		})
 	}

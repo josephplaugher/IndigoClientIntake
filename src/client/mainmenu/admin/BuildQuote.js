@@ -97,7 +97,7 @@ class BuildQuote extends FormClass {
 			total: parseFloat(total),
 			selections: newSelections
 		})
-		this.extraData = { selections: newSelections }
+		this.extraData = { selections: newSelections, total: total }
 	}
 
 	saveForLater() {
