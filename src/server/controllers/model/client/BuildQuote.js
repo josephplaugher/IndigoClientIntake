@@ -25,8 +25,9 @@ class BuildQuote {
 			let password = await Client.passwordHash('password')
 			CurrentClient = await Client.createClient(password)
 		}
-		// generate a quote id
-		this.quoteId = uuid()
+		// generate a quote id and shorten it to 6 characters
+		let fullID = uuid()
+		this.quoteId = fullID.substr(fullID.length - 6)
 		//create the header row that contains generate quote info
 		let header = await this.enterQuoteHeader(CurrentClient)
 		// place the selection by id into a new array for iteration below

@@ -29,7 +29,7 @@ class EditView extends FormClass {
 	response(resp) {
 		this.setState({ userNotify: resp.data.userNotify })
 		this.props.refreshOptions()
-		this.props.close()
+		//	this.props.close()
 	}
 
 	render() {

@@ -18,9 +18,6 @@ routes.post('/buildQuote', (req, res) => {
 
 routes.get('/quoteID/:quoteID', GetQuoteByID)
 
-routes.get('/getAllQuotes', (req, res) => {
-	const Quotes = new GetAllQuotes(req, res)
-	Quotes.get()
-})
+routes.get('/getAllQuotes', GetAllQuotes)
 
 module.exports = routes
