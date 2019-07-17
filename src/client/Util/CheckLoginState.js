@@ -5,14 +5,14 @@ const checkLoginState = (newToken) => {
 	//a newToken is provided only if CheckLoginState is called after a CRUD operation
 	//otherwise the token in sessionStorage will be used. This will only occur
 	// on a users page refresh
-	var AppCoToken = ''
-	if (newToken) {
-		sessionStorage.setItem(process.env.TOKEN_NAME, newToken)
-		AppCoToken = newToken
-	} else {
-		AppCoToken = sessionStorage.getItem(process.env.TOKEN_NAME)
-	}
 	return new Promise((resolve, reject) => {
+		var AppCoToken = ''
+		if (newToken) {
+			sessionStorage.setItem(process.env.TOKEN_NAME, newToken)
+			AppCoToken = newToken
+		} else {
+			AppCoToken = sessionStorage.getItem(process.env.TOKEN_NAME)
+		}
 		//if there is a token
 		console.log('appco token: ', AppCoToken)
 		if (AppCoToken) {

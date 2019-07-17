@@ -7,7 +7,8 @@
 	padding-left: 30px;
 }
 
-.rfa_textinput {
+.rfa_textinput,
+.rfa_select {
 	border-top: 0px;
 	border-right: 0px;
 	border-left: 0.5px solid $font-color;
@@ -35,7 +36,8 @@
 	background-color: #aeaeae80;
 }
 
-.rfa_input-container {
+.rfa_input-container,
+.rfa_select-container {
 	display: inline-block;
 	margin: 12px;
 }
