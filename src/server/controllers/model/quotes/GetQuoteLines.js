@@ -53,7 +53,7 @@ class GetQuoteLines {
 	getItemDetails(id) {
 		return new Promise((resolve, reject) => {
 			let Query = {
-				text: `SELECT item, price, category, id 
+				text: `SELECT item, price, category, id, image
                 FROM decor
 				WHERE id = $1`,
 				values: [id]

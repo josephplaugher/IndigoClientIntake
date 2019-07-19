@@ -56,6 +56,8 @@ class QuoteDetail extends FormClass {
 	buildQuoteLines(quoteLines, clientData) {
 		let QuoteLines = quoteLines.map((item) => (
 			<div className='item-row' key={`${item.item}-div`}>
+				<img src='images/flower.jpeg' alt='image' />
+
 				<p key={`${item.id}-p`} className='item-p'>
 					{item.item}
 				</p>
