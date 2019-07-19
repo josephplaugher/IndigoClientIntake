@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormClass, Input, Button } from 'reactform-appco'
+import { FormClass, Input, Select, Button } from 'reactform-appco'
 import ValRules from 'Util/ValRules'
 import UserNotify from 'Util/UserNotify'
 import SetUrl from 'Util/SetUrl'
@@ -18,11 +18,13 @@ class BuildQuote extends FormClass {
 			fname: '',
 			lname: '',
 			email: '',
+			eventType: '',
 			selections: [],
 			formData: {
 				fname: '',
 				lname: '',
-				email: ''
+				email: '',
+				eventType: ''
 			}
 		}
 		this.handleChange = this.handleChange.bind(this)
@@ -95,7 +97,7 @@ class BuildQuote extends FormClass {
 			total: parseFloat(total),
 			selections: newSelections
 		})
-		this.extraData = { selections: newSelections }
+		this.extraData = { selections: newSelections, total: total }
 	}
 
 	saveForLater() {
@@ -124,6 +126,17 @@ class BuildQuote extends FormClass {
                         <Input name="fname" label="First Name" value={this.state.fname} onChange={this.rfa_onChange} />  
                         <Input name="lname" label="Last Name" value={this.state.lname} onChange={this.rfa_onChange} />    
                         <Input name="email" label="Email" value={this.state.email} onChange={this.rfa_onChange} />
+						<Select
+							name='eventType'
+							label='Event Type'
+							options={[
+								'Wedding', 'Mitzvah', 'anniversary', 'corporate', 'Birthday', 'Vow Renewal',
+								'More than 6 months'
+							]}
+							value={this.state.eventType}
+							onChange={this.rfa_onChange}
+							multiple={false}
+						/>
                         {this.state.display}
                         <div id='price-main'>
 						<p className='text'>{`Total Estimated Cost: $${

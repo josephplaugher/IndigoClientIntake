@@ -1,9 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import User from './User'
-import QuestAdmin from './admin/QuestAdmin'
+import Options from './admin/Options'
 import NewClient from './admin/NewClient'
 import BuildQuote from './admin/BuildQuote'
+import ViewQuotes from './admin/ViewQuotes'
 import { Menu, MenuButton } from 'menu-appco'
 import MenuSyle from './MenuStyle'
 import CreditCard from './payment/CreditCard'
@@ -60,7 +61,7 @@ class AdminHome extends React.Component {
 					<div id="admin-nav-pane">  
 					<Link to="/options" className="nav">Decor Options</Link>
             			<Route path="/options" 
-						render={(props) => <QuestAdmin />}
+						render={(props) => <Options />}
 						/>   
 					<Link to="/new-client" className="nav">Add New Client</Link>
             			<Route path="/new-client" 
@@ -69,6 +70,10 @@ class AdminHome extends React.Component {
 					<Link to="/build-quote" className="nav">Build A Quote</Link>
             			<Route path="/build-quote" 
 						render={(props) => <BuildQuote />}
+						/>  
+					<Link to="/view-quotes" className="nav">Quotes</Link>
+            			<Route path="/view-quotes" 
+						render={(props) => <ViewQuotes />}
 						/>  
 					<Link to="/contracts" className="nav">Contracts</Link>
             			<Route path="/contracts" 

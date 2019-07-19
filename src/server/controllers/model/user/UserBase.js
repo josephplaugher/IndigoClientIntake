@@ -8,10 +8,12 @@ class UserBase {
 		this.res = res
 	}
 
-	getCustomersByEmail() {
+	getCustomersByEmail(email) {
 		let customer = new Promise((resolve, reject) => {
 			this.stripe.customers.list(
-				{ email: this.req.body.email },
+				// if this is a post request, we'll use the post body
+				// if not, we pipe in the email from the get body
+				{ email: this.req.body.email || email },
 				(error, customers) => {
 					if (error) {
 						reject(error)
