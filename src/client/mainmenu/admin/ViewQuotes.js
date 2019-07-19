@@ -3,9 +3,7 @@ import { FormClass, Input, Button } from 'reactform-appco'
 import ReactTable from 'react-table'
 import SetUrl from 'Util/SetUrl'
 import Ajax from 'Util/Ajax'
-import LightBox from 'lightbox-appco'
-import MenuStyle from './../MenuStyle'
-import EditView from './EditView'
+import QuoteDetail from './QuoteDetail'
 
 import 'react-table/react-table.css'
 
@@ -20,7 +18,6 @@ class ViewQuotes extends React.Component {
 		}
 		this.changeItem = this.changeItem.bind(this)
 		this.updateItem = this.updateItem.bind(this)
-		//this.closeLightBox = this.closeLightBox.bind(this)
 		// this.updateList = this.updateList.bind(this)
 		this.getAllQuotes = this.getAllQuotes.bind(this)
 		this.showQuotesList = this.showQuotesList.bind(this)
@@ -49,10 +46,6 @@ class ViewQuotes extends React.Component {
 		this.setState({ editView: false })
 	}
 
-	// closeLightBox() {
-	// 	this.setState({ editView: false })
-	// }
-
 	changeItem() {}
 
 	render() {
@@ -67,10 +60,9 @@ class ViewQuotes extends React.Component {
 			<>
 				{this.state.editView ? (
 					<>
-						<EditView
+						<QuoteDetail
 							data={this.state.editData}
 							refreshOptions={this.getAllQuotes}
-							//close={this.closeLightBox}
 						/>
 						<Button
 							id='view-quote-list'
