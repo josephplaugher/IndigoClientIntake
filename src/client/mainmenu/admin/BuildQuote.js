@@ -25,13 +25,16 @@ class BuildQuote extends FormClass {
 				lname: '',
 				email: '',
 				eventType: ''
-			}
+			},
+			viewLargeImage: ''
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.updateList = this.updateList.bind(this)
 		this.getDecorList = this.getDecorList.bind(this)
 		this.saveForLater = this.saveForLater.bind(this)
 		this.setSendNow = this.setSendNow.bind(this)
+		this.enlargeThumbnail = this.enlargeThumbnail.bind(this)
+		this.closeImage = this.closeImage.bind(this)
 		this.response = this.response.bind(this)
 	}
 
@@ -53,6 +56,12 @@ class BuildQuote extends FormClass {
 	updateList(list) {
 		let display = list.map((item) => (
 			<div className='item-row' key={`${item.item}-div`}>
+				<img
+					className='thumbnail'
+					src={item.image}
+					alt='image'
+					onClick={this.enlargeThumbnail}
+				/>
 				<p key={`${item.id}-p`} className='item-p'>
 					{item.item}
 				</p>
@@ -116,6 +125,14 @@ class BuildQuote extends FormClass {
 		console.log('the quote response: ', resp)
 	}
 
+	enlargeThumbnail(event) {
+		this.setState({ viewLargeImage: event.target.src })
+	}
+
+	closeImage() {
+		this.setState({ viewLargeImage: false })
+	}
+
 	render() {
 		return (
 			<div id='questionaire-main'>
@@ -137,7 +154,23 @@ class BuildQuote extends FormClass {
 							onChange={this.rfa_onChange}
 							multiple={false}
 						/>
-                        {this.state.display}
+						{this.state.display}
+						<div id='enlarged-image'>
+						{this.state.viewLargeImage ? (
+							<>
+								<Button
+									id='close-image'
+									value='Close Image'
+									onClick={this.closeImage}
+								/>
+								<img
+									className='large-thumbnail'
+									src={this.state.viewLargeImage}
+									alt='image'
+								/>
+							</>
+						) : null}
+					</div>
                         <div id='price-main'>
 						<p className='text'>{`Total Estimated Cost: $${
 							this.state.total

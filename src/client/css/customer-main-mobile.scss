@@ -41,7 +41,30 @@
 	}
 
 	#questionaire-main {
+		padding: 10px;
 		display: grid;
+		grid-column-start: 1;
+		grid-column-end: 6;
+	}
+
+	#options-main {
+		padding: 10px;
+		display: grid;
+		grid-column-start: 1;
+		grid-column-end: 6;
+	}
+
+	.item-row {
+		border: 0.5px solid $font-color;
+		border-radius: 5px;
+		padding: 8px;
+		margin: 8px;
+		font-size: 12px;
+		grid-column-start: 1;
+		grid-column-end: 5;
+	}
+
+	#enlarged-image {
 		grid-column-start: 1;
 		grid-column-end: column5-end;
 	}

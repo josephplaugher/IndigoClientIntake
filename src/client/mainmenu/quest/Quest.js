@@ -1,17 +1,21 @@
 import React from 'react'
 import SetUrl from 'Util/SetUrl'
 import Ajax from 'Util/Ajax'
+import { Button } from 'reactform-appco'
 
 class Quest extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
 			display: [],
-			total: 0
+			total: 0,
+			viewLargeImage: false
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.updateList = this.updateList.bind(this)
 		this.getDecorList = this.getDecorList.bind(this)
+		this.enlargeThumbnail = this.enlargeThumbnail.bind(this)
+		this.closeImage = this.closeImage.bind(this)
 	}
 
 	componentDidMount() {
@@ -32,11 +36,14 @@ class Quest extends React.Component {
 	updateList(list) {
 		let display = list.map((item) => (
 			<div className='item-row' key={`${item.item}-div`}>
+				<img
+					className='thumbnail'
+					src={item.image}
+					alt='image'
+					onClick={this.enlargeThumbnail}
+				/>
 				<p key={`${item.id}-p`} className='item-p'>
 					{item.item}
-				</p>
-				<p key={`${item.category}-p`} className='item-p'>
-					{` | ${item.category}`}
 				</p>
 				<input
 					type='checkbox'
@@ -59,22 +66,25 @@ class Quest extends React.Component {
 		const price = target.id
 		const value = target.type === 'checkbox' ? target.checked : target.value
 		const name = target.name
-		console.log('change: name ', name, 'value ', value, 'price ', price)
 
 		let total = parseFloat(this.state.total)
-		console.log('initial total: ', total)
 		if (value) {
 			total = parseFloat(total) + parseFloat(price)
-			console.log('adding total: ', total)
 		} else {
 			total = parseFloat(total) - parseFloat(price)
-			console.log('subt total: ', total)
 		}
-		console.log('new total: ', total)
 		this.setState({
 			[name]: value,
 			total: parseFloat(total)
 		})
+	}
+
+	enlargeThumbnail(event) {
+		this.setState({ viewLargeImage: event.target.src })
+	}
+
+	closeImage() {
+		this.setState({ viewLargeImage: false })
 	}
 
 	render() {
@@ -86,6 +96,23 @@ class Quest extends React.Component {
 				<div id='options-main'>{this.state.display}</div>
 				<div id='price-main'>
 					<p className='text'>Total Estimated Cost: {this.state.total}</p>
+				</div>
+				<br />
+				<div id='enlarged-image'>
+					{this.state.viewLargeImage ? (
+						<>
+							<Button
+								id='close-image'
+								value='Close Image'
+								onClick={this.closeImage}
+							/>
+							<img
+								className='large-thumbnail'
+								src={this.state.viewLargeImage}
+								alt='image'
+							/>
+						</>
+					) : null}
 				</div>
 			</div>
 		)

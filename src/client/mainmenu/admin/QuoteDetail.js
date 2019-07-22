@@ -91,7 +91,6 @@ class QuoteDetail extends FormClass {
 	}
 
 	enlargeThumbnail(event) {
-		console.log('image: ', event.target)
 		this.setState({ viewLargeImage: event.target.src })
 	}
 
