@@ -4,6 +4,9 @@ import ValRules from 'Util/ValRules'
 import UserNotify from 'Util/UserNotify'
 import SetUrl from 'Util/SetUrl'
 import Ajax from 'Util/Ajax'
+import LightBox from 'lightbox-appco'
+
+import './thumbnail.scss'
 
 class QuoteDetail extends FormClass {
 	constructor(props) {
@@ -18,6 +21,8 @@ class QuoteDetail extends FormClass {
 			// was fetch prior to this component opening. now that
 			// this component is open we'll fetch the line items for display
 			id: this.props.data.id,
+			fname: '',
+			lname: '',
 			email: this.props.data.email,
 			eventType: this.props.data.event_type,
 			total: this.props.data.total_cost,
@@ -28,11 +33,14 @@ class QuoteDetail extends FormClass {
 				eventType: this.props.data.event_type,
 				total: this.props.data.total_cost
 			},
-			quoteLines: []
+			quoteLines: [],
+			viewLargeImage: false
 		}
 		this.response = this.response.bind(this)
 		this.getQuoteLines = this.getQuoteLines.bind(this)
 		this.buildQuoteLines = this.buildQuoteLines.bind(this)
+		this.enlargeThumbnail = this.enlargeThumbnail.bind(this)
+		this.closeImage = this.closeImage.bind(this)
 	}
 
 	componentDidMount() {
@@ -56,13 +64,14 @@ class QuoteDetail extends FormClass {
 	buildQuoteLines(quoteLines, clientData) {
 		let QuoteLines = quoteLines.map((item) => (
 			<div className='item-row' key={`${item.item}-div`}>
-				<img src='images/flower.jpeg' alt='image' />
-
+				<img
+					className='thumbnail'
+					src={item.image}
+					alt='image'
+					onClick={this.enlargeThumbnail}
+				/>
 				<p key={`${item.id}-p`} className='item-p'>
 					{item.item}
-				</p>
-				<p key={`${item.category}-p`} className='item-p'>
-					{` | ${item.category}`}
 				</p>
 				<p key={`${item.price}-p`} className='price-p'>
 					${item.price}
@@ -79,6 +88,15 @@ class QuoteDetail extends FormClass {
 	response(resp) {
 		this.setState({ userNotify: resp.data.userNotify })
 		this.props.refreshOptions()
+	}
+
+	enlargeThumbnail(event) {
+		console.log('image: ', event.target)
+		this.setState({ viewLargeImage: event.target.src })
+	}
+
+	closeImage() {
+		this.setState({ viewLargeImage: false })
 	}
 
 	render() {
@@ -123,6 +141,22 @@ class QuoteDetail extends FormClass {
 						multiple={false}
 					/>
 					{this.state.quoteLines}
+					<div id='enlarged-image'>
+						{this.state.viewLargeImage ? (
+							<>
+								<Button
+									id='close-image'
+									value='Close Image'
+									onClick={this.closeImage}
+								/>
+								<img
+									className='large-thumbnail'
+									src={this.state.viewLargeImage}
+									alt='image'
+								/>
+							</>
+						) : null}
+					</div>
 					<div id='price-main'>
 						<p className='text'>{`Total Estimated Cost: $${
 							this.state.total

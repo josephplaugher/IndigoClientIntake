@@ -12,17 +12,15 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/, //keeping react files around, but we're not going to use them for now
-				use: {
-					loader: 'babel-loader'
-				}
+				use: { loader: 'babel-loader' }
 			},
 			{
 				test: /\.(css|scss)$/,
 				use: ['style-loader', 'css-loader', 'sass-loader']
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
-				use: ['file-loader']
+				test: /\.(jpg|jpeg|png)$/,
+				use: { loader: 'url-loader' }
 			}
 		]
 	},
