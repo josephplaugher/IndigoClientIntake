@@ -34,7 +34,7 @@ class ViewQuotes extends React.Component {
 			})
 			.then((resp) => {
 				console.log('the quotes: ', resp.data.quotes)
-				this.setState({ quotes: resp.data.quotes })
+				this.setState({ quotes: resp.data.quotes || [] })
 			})
 	}
 
