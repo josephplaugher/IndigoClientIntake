@@ -64,6 +64,9 @@ class EditView extends FormClass {
 				<div className='rfa_button-div'>
 					<Button id='delete-item' value='Delete' />
 				</div>
+				<div className='rfa_button-div'>
+					<Button id='return' value='Back to List' />
+				</div>
 			</div>
 		)
 	}
