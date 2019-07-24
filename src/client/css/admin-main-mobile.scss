@@ -53,7 +53,7 @@
 		border-radius: 5px;
 		padding: 8px;
 		margin: 8px;
-		font-size: 12px;
+		font-size: 15px;
 		grid-column-start: 2;
 		grid-column-end: 5;
 	}
@@ -66,9 +66,9 @@
 		color: $font-color;
 	}
 
-	.price-p {
-		float: right;
-	}
+	// .price-p {
+	// 	float: right;
+	// }
 
 	.item-check {
 		float: right;

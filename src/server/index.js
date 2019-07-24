@@ -10,6 +10,7 @@ const clientCont = require('./controllers/clientCont.js')
 const achCont = require('./controllers/achCont.js')
 const ccCont = require('./controllers/ccCont.js')
 const decorCont = require('./controllers/decorCont.js')
+const liveSearchCont = require('./controllers/liveSearchCont.js')
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
@@ -48,6 +49,7 @@ app.use('/', clientCont)
 app.use('/', checkAuth, decorCont)
 app.use('/', checkAuth, achCont)
 app.use('/', checkAuth, ccCont)
+app.use('/', checkAuth, liveSearchCont)
 
 //this route renders the UI. The UI will check for the cookie and token
 //and log the user out if they don't exist.

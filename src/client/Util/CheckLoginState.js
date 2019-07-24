@@ -21,8 +21,8 @@ const checkLoginState = (newToken) => {
 					reject('error checking login state: ', e)
 				})
 				.then((response) => {
-					// console.log('check login resp token: ', response.headers.token)
-					// console.log('check login resp auth: ', response.headers.authorized)
+					console.log('check login resp token: ', response.headers.token)
+					console.log('check login resp auth: ', response.headers.authorized)
 					if (response.headers.token && response.headers.authorized) {
 						let userData = JSON.parse(
 							sessionStorage.getItem(process.env.USER_DATA_LABEL)
@@ -36,7 +36,7 @@ const checkLoginState = (newToken) => {
 							userData: userData
 						})
 					} else {
-						// console.log('no response headers for auth')
+						console.log('no response headers for auth')
 						sessionStorage.removeItem(process.env.USER_DATA_LABEL)
 						sessionStorage.removeItem(process.env.TOKEN_NAME)
 						resolve({
@@ -47,7 +47,7 @@ const checkLoginState = (newToken) => {
 				})
 		} else {
 			//if there is no token
-			// console.log('there is no token')
+			console.log('there is no token')
 			sessionStorage.removeItem(process.env.USER_DATA_LABEL)
 			sessionStorage.removeItem(process.env.TOKEN_NAME)
 			resolve({

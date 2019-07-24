@@ -15,7 +15,7 @@ class Auth {
 	start() {
 		//check if cookie and token exist
 		if (this.req.cookies[this.cookieName] && this.req.headers.csrf) {
-			console.log('cookie and token exist')
+			console.log('server: cookie and token exist')
 			this.compare()
 		} else {
 			this.unsetLoginHeaders()
@@ -25,14 +25,16 @@ class Auth {
 	compare() {
 		const cookie = this.req.cookies[this.cookieName]
 		const csrf = this.req.headers.csrf
+		console.log('cookie token: ', cookie.token)
+		console.log('csrf token: ', csrf)
 		//if cookie and token exist and the token is valid, check that they are the same
 		if (cookie.token === csrf) {
-			console.log('cookie and token are the same')
+			console.log('server: cookie and token are the same')
 			var verifiedToken
 			try {
 				verifiedToken = jwt.verify(csrf, process.env.JWT_SECRET)
 			} catch (error) {
-				console.log('cookie and token are NOT the same')
+				console.log('server: cookie and token are NOT the same')
 				this.unsetLoginHeaders()
 			}
 			//if the token and cookie match, renew them
