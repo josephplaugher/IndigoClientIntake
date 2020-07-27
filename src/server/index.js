@@ -41,15 +41,16 @@ const checkAuth = (req, res, next) => {
 }
 
 app.get('/checkLoginState', checkAuth, (req, res) => {
+	console.log('server: checking login state')
 	res.status(200).json({ checkLoginState: 'done' })
 })
 
 app.use('/', userCont)
-app.use('/', clientCont)
+// app.use('/', checkAuth, clientCont)
 app.use('/', checkAuth, decorCont)
-app.use('/', checkAuth, achCont)
-app.use('/', checkAuth, ccCont)
-app.use('/', checkAuth, liveSearchCont)
+// app.use('/', checkAuth, achCont)
+// app.use('/', checkAuth, ccCont)
+// app.use('/', checkAuth, liveSearchCont)
 
 //this route renders the UI. The UI will check for the cookie and token
 //and log the user out if they don't exist.

@@ -64,6 +64,7 @@ class Login extends UserBase {
 					})
 				} else if (result == true) {
 					delete userData.password //ensure the pw hash isn't sent along to the client
+					console.log('initial token payload: ', userData)
 					var token = jwt.sign({ userData: userData }, process.env.JWT_SECRET, {
 						expiresIn: '1h'
 					})
@@ -79,7 +80,7 @@ class Login extends UserBase {
 					)
 					res
 						.status(200)
-						.json({ userNotify: {}, userData: userData, token, token })
+						.json({ userNotify: {}, userData: userData, token: token })
 				}
 			})
 		} else {

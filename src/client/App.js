@@ -44,8 +44,8 @@ class App extends FormClass {
 		this.setLoginState()
 	}
 
-	setLoginState = () => {
-		let auth = checkLoginState()
+	setLoginState = (newToken) => {
+		let auth = checkLoginState(newToken)
 		auth.then((res) => {
 			if (res.isLoggedIn === true) {
 				this.setState({
@@ -136,6 +136,7 @@ class App extends FormClass {
 						<EB comp='Home'>
 							<StripeProvider apiKey={this.stripeKey}>
 								<Home
+									setLoginState={this.setLoginState}
 									userData={this.state.userData}
 									resfreshSources={this.refreshStripeSources}
 									signOut={this.signOut}
@@ -146,6 +147,7 @@ class App extends FormClass {
 					{this.state.login ? (
 						<>
 							<Login
+								setLoginState={this.setLoginState}
 								response={this.loginResponse}
 								switchToCreateAccount={this.switchToCreateAccount}
 							/>

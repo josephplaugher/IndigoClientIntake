@@ -1,10 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import User from './User'
-import Options from './admin/Options'
+import Options from './admin/decor/Options'
 import NewClient from './admin/NewClient'
-import BuildQuote from './admin/BuildQuote'
-import ViewQuotes from './admin/ViewQuotes'
+import BuildQuote from './admin/quotes/BuildQuote'
+import ViewQuotes from './admin/quotes/ViewQuotes'
+import EventTypes from './admin/events/EventTypes'
+import ViewContracts from './admin/contracts/ViewContracts'
 import { Menu, MenuButton } from 'menu-appco'
 import MenuSyle from './MenuStyle'
 import CreditCard from './payment/CreditCard'
@@ -63,6 +65,10 @@ class AdminHome extends React.Component {
             			<Route path="/options" 
 						render={(props) => <Options />}
 						/>   
+					<Link to="/event-types" className="nav">Event Types</Link>
+            			<Route path="/event-types" 
+						render={(props) => <EventTypes />}
+						/> 
 					<Link to="/new-client" className="nav">Add New Client</Link>
             			<Route path="/new-client" 
 						render={(props) => <NewClient />}
@@ -77,7 +83,7 @@ class AdminHome extends React.Component {
 						/>  
 					<Link to="/contracts" className="nav">Contracts</Link>
             			<Route path="/contracts" 
-						render={(props) => <div>This can be whatever you want it to be. List of contracts pending signature, a place to edit your standard contract, etc...</div>}
+						render={(props) => <ViewContracts/>}
 						/>      
 				
 					</div>

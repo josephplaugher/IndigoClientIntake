@@ -32,6 +32,7 @@ class Home extends React.Component {
 			<>
 				{this.props.userData.admin ? (
 					<AdminHome
+						setLoginState={this.props.setLoginState}
 						userData={this.props.userData}
 						resfreshSources={this.props.refreshStripeSources}
 						signOut={this.props.signOut}

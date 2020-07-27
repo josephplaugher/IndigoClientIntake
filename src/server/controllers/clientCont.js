@@ -7,23 +7,23 @@ const GetQuoteLines = require('./model/quotes/GetQuoteLines')
 
 const routes = express.Router()
 
-routes.post('/newClient', (req, res) => {
+routes.post('/client/newClient', (req, res) => {
 	const Client = new NewClient(req, res)
 	Client.checkClient()
 })
 
-routes.post('/buildQuote', (req, res) => {
+routes.post('/client/buildQuote', (req, res) => {
 	const Quote = new BuildQuote(req, res)
 	Quote.saveAndSend()
 })
 
-routes.get('/quoteID/:quoteID', GetQuoteByID)
+routes.get('/client/quoteID/:quoteID', GetQuoteByID)
 
-routes.get('/getQuoteLines/id/:quoteID/email/:email', (req, res) => {
+routes.get('/client/getQuoteLines/id/:quoteID/email/:email', (req, res) => {
 	let QuoteLines = new GetQuoteLines(req, res)
 	QuoteLines.start()
 })
 
-routes.get('/getAllQuotes', GetAllQuotes)
+routes.get('/client/getAllQuotes', GetAllQuotes)
 
 module.exports = routes

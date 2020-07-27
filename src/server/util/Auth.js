@@ -14,8 +14,10 @@ class Auth {
 
 	start() {
 		//check if cookie and token exist
+		// console.log('list of cookies', this.req.cookies)
+
 		if (this.req.cookies[this.cookieName] && this.req.headers.csrf) {
-			console.log('server: cookie and token exist')
+			// console.log('server: cookie and token exist')
 			this.compare()
 		} else {
 			this.unsetLoginHeaders()
@@ -46,9 +48,11 @@ class Auth {
 
 	renewLogin(verifiedToken, prevCookiePayload) {
 		//upon authentication, renew the token and the cookie
-		console.log('user id for auth: ', verifiedToken.userData.id)
+		console.log('renewing login on the server')
+		console.log('server: user id for auth: ', verifiedToken.userData.id)
 		this.req.headers['stripeConn'] = verifiedToken.userData.id
 		delete verifiedToken.exp
+		console.log('renewed token payload: ', verifiedToken.userData)
 		var token = jwt.sign(
 			{ userData: verifiedToken.userData },
 			process.env.JWT_SECRET,
@@ -56,6 +60,7 @@ class Auth {
 				expiresIn: '1h'
 			}
 		)
+		// console.log('new token: ', token)
 		//clear the current cookie
 		this.clearCurrentCookie(prevCookiePayload)
 		//set new cookie that matches new token
@@ -65,7 +70,7 @@ class Auth {
 	}
 
 	clearCurrentCookie() {
-		console.log('clearing the current cookie')
+		// console.log('server: clearing the current cookie')
 		this.res.clearCookie(process.env.COOKIE_NAME, {
 			expires: new Date(Date.now() + 60 * 60 * 1000),
 			maxAge: 60 * 60 * 1000,
@@ -75,8 +80,8 @@ class Auth {
 	}
 
 	setNewCookie(token) {
-		console.log('setting the new cookie')
-
+		// console.log('server: setting the new cookie')
+		console.log('server: token in new cookie: ', token)
 		this.res.cookie(
 			process.env.COOKIE_NAME,
 			{ token: token },
@@ -87,18 +92,19 @@ class Auth {
 				secure: process.env.NODE_ENV === 'production'
 			}
 		)
+		// console.log('new cookie ', this.res.cookie.token)
 	}
 
 	setLoginHeaders(token) {
-		console.log('setting the login headers')
-		this.res.header(this.authorized, true)
+		// console.log('setting the login headers')
+		console.log('server: new csrf token: ', token)
+		//this.res.header(this.authorized, true)
 		this.res.header('token', token)
 		this.next()
 	}
 
 	unsetLoginHeaders() {
 		console.log('unsetting the login headers')
-		this.res.header(this.authorized, '')
 		this.res.header('token', '')
 		this.next()
 	}
